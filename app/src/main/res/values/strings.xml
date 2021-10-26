@@ -8,5 +8,8 @@
     <string name="calendar_top_text">Calendar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="right_arrow">→</string>
+    <string name="left_arrow">←</string>
+    <string name="calendar_month_text">October</string>
 
 </resources>
