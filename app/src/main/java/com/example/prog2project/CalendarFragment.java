@@ -2,6 +2,8 @@ package com.example.prog2project;
 
 import static android.widget.Toast.makeText;
 
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,7 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -27,6 +28,9 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
+    public LocalDate selectedFullDate;
+
+
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -38,9 +42,12 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         View calFragView = inflater.inflate(R.layout.fragment_calendar, container, false);
         Button prevMonthButton = (Button) calFragView.findViewById(R.id.prevButton);
         Button nextMonthButton = (Button) calFragView.findViewById(R.id.nextButton);
+        Button addDateEventButton = (Button) calFragView.findViewById(R.id.addDateEventButton);
+
 
         prevMonthButton.setOnClickListener(view -> prevButtonAction());
         nextMonthButton.setOnClickListener(view -> nextButtonAction());
+        addDateEventButton.setOnClickListener(view -> addDateEvent());
 
         return calFragView;
     }
@@ -62,6 +69,9 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(),7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
+
+
+
 
     }
 
@@ -105,10 +115,14 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     @Override
     public void onItemClick(int position, String dayText) {
-        if(dayText.equals("")){
+        if(!dayText.equals("")){
             String message = "Selected date: "+dayText+" "+monthYearFromDate(selectedDate);
             Toast.makeText(getActivity(),message,Toast.LENGTH_LONG).show();
+            selectedFullDate = selectedDate.withDayOfMonth(1).plusDays(Integer.parseInt(dayText)-1);
 
         }
+    }
+    private void addDateEvent(){
+        Toast.makeText(getActivity(), selectedFullDate.toString(), Toast.LENGTH_LONG ).show();
     }
 }

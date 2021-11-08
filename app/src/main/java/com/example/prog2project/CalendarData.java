@@ -1,3 +1,5 @@
+package com.example.prog2project;
+
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 
