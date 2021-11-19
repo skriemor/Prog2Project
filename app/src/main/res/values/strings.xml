@@ -11,5 +11,15 @@
     <string name="right_arrow">→</string>
     <string name="left_arrow">←</string>
     <string name="calendar_month_text">October</string>
+    <string name="october">October</string>
+    <string name="mon">MON</string>
+    <string name="tue">TUE</string>
+    <string name="plus">+</string>
+    <string name="sat">SAT</string>
+    <string name="sun">SUN</string>
+    <string name="fri">FRI</string>
+    <string name="thu">THU</string>
+    <string name="wed">WED</string>
+    <string name="to">to</string>
 
 </resources>

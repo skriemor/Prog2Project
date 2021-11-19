@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="October"
+            android:text="@string/october"
             android:textAlignment="center"
             android:textColor="@color/black" />
 
@@ -57,91 +57,102 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
     >
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:ignore="Suspicious0dp"
-        android:layout_weight="1"
-        android:text="MON"
-        android:textColor="@color/gray"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:ignore="Suspicious0dp"
-            android:layout_weight="1"
-            android:text="TUE"
-            android:textColor="@color/gray"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:ignore="Suspicious0dp"
-            android:layout_weight="1"
-            android:text="WED"
-            android:textColor="@color/gray"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:ignore="Suspicious0dp"
-            android:layout_weight="1"
-            android:text="THU"
-            android:textColor="@color/gray"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:ignore="Suspicious0dp"
-            android:layout_weight="1"
-            android:text="FRI"
-            android:textColor="@color/gray"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:ignore="Suspicious0dp"
-            android:layout_weight="1"
-            android:text="SAT"
-            android:textColor="@color/gray"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:ignore="Suspicious0dp"
             android:layout_weight="1"
-            android:text="SUN"
-            android:textColor="@color/gray"
+            android:text="@string/sun"
             android:textAlignment="center"
+            android:textColor="#757575"
             android:textSize="16sp"
-            />
+            tools:ignore="Suspicious0dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mon"
+            android:textAlignment="center"
+            android:textColor="#757575"
+            android:textSize="16sp"
+            tools:ignore="Suspicious0dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tue"
+            android:textAlignment="center"
+            android:textColor="#757575"
+            android:textSize="16sp"
+            tools:ignore="Suspicious0dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/wed"
+            android:textAlignment="center"
+            android:textColor="#757575"
+            android:textSize="16sp"
+            tools:ignore="Suspicious0dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/thu"
+            android:textAlignment="center"
+            android:textColor="#757575"
+            android:textSize="16sp"
+            tools:ignore="Suspicious0dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/fri"
+            android:textAlignment="center"
+            android:textColor="#757575"
+            android:textSize="16sp"
+            tools:ignore="Suspicious0dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sat"
+            android:textAlignment="center"
+            android:textColor="#757575"
+            android:textSize="16sp"
+            tools:ignore="Suspicious0dp" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/CalendarRecycleView"
         android:layout_width="match_parent"
-        android:layout_height="557dp">
+        android:layout_height="490dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/addDateEventButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/addDateEventButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plus" />
+
+        <Button
+            android:id="@+id/dispDatesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dates" />
+    </LinearLayout>
 
 </LinearLayout>

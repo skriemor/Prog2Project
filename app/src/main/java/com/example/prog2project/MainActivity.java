@@ -22,23 +22,13 @@ public class MainActivity extends FragmentActivity /*AppCompatActivity */{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        //Egyelore nem dontottem appcompat es nested frags kozott...
-        //For AppCompat... no actionbar
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        */
+
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         NavController navController = Navigation.findNavController(findViewById(R.id.nav_host_fragment));
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
 
-        /*
-        //For AppCompat... actionbar titles
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        */
 
 
 

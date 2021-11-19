@@ -4,15 +4,16 @@ import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CalendarData {
     DateFormat customDateFormatter = new SimpleDateFormat("yyyy/MM/dd hh:mm");
     DateFormat customDateParser = new SimpleDateFormat("yyyy.MM.dd.hh.mm");
-    Date startDate, endDate;
+    LocalDate startDate, endDate;
     String location, title, notes;
 
-    public CalendarData(Date startDate, Date endDate, String location, String title, String notes) {
+    public CalendarData(LocalDate startDate, LocalDate endDate, String location, String title, String notes) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
@@ -36,11 +37,11 @@ public class CalendarData {
         return customDateFormatter.format(d);
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
@@ -56,11 +57,11 @@ public class CalendarData {
         return title;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
