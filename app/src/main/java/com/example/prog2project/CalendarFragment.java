@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -47,9 +48,9 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
     public LocalDate selectedFullDate;
-    public ArrayList<CalendarData> calArrayList = new ArrayList<>();
+    public  ArrayList<CalendarData> calArrayList = new ArrayList<>();
     DateTimeFormatter fos = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+    public ArrayList<String> thisMonthDayList = new ArrayList<>();
 
 
     String title="",note="",location="",
@@ -68,18 +69,24 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         Button nextMonthButton = (Button) calFragView.findViewById(R.id.nextButton);
         Button addDateEventButton = (Button) calFragView.findViewById(R.id.addDateEventButton);
         Button dispDatesButton = (Button) calFragView.findViewById(R.id.dispDatesButton);
+        Button remEventButton = (Button) calFragView.findViewById(R.id.removeEventButton);
 
         dispDatesButton.setOnClickListener(view -> homeListDatesEvent());
         prevMonthButton.setOnClickListener(view -> prevButtonAction());
         nextMonthButton.setOnClickListener(view -> nextButtonAction());
         addDateEventButton.setOnClickListener(view -> addDateEvent());
-
+        remEventButton.setOnClickListener(view -> delEvent());
         return calFragView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        try {
+            calArrayInit();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         initWidgets();
         selectedDate = LocalDate.now(); //vegre helyreteve
         setMonthView();
@@ -95,7 +102,8 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        initThisMonthDayList();
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this, thisMonthDayList);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
@@ -108,6 +116,18 @@ sajnos vasarnapot tekinti a het elso napjanak,
 dehat standardizalt *shrugs*
 
  */
+    public void initThisMonthDayList(){
+        try {
+            calArrayInit();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        thisMonthDayList.clear();
+        for (CalendarData c : calArrayList)
+            if(monthYearFromDate(selectedDate).equals(monthYearFromDate(c.getStartDate())))
+                thisMonthDayList.add(String.valueOf(c.getStartDate().getDayOfMonth()));
+
+    }
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
@@ -160,9 +180,9 @@ dehat standardizalt *shrugs*
     private void addDateEvent() {
         Toast.makeText(getActivity(), selectedFullDate.toString(), Toast.LENGTH_LONG).show();
         try {
-            calArrayInit();
+             calArrayInit();
         } catch (FileNotFoundException e) {
-            calArrayList = new ArrayList<>();
+            calArrayList = new ArrayList<CalendarData>();
         }
 
         startDateP = selectedFullDate.toString();
@@ -205,7 +225,7 @@ dehat standardizalt *shrugs*
 
     public void homeListDatesEvent()  {
         try {
-            calArrayInit();
+             calArrayInit();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -215,6 +235,25 @@ dehat standardizalt *shrugs*
         Toast.makeText(getActivity(), kekw.toString() , Toast.LENGTH_LONG).show();
 
 
+    }
+    public void delEvent(){
+        try {
+            calArrayInit();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i< calArrayList.size();i++) {
+            if (calArrayList.get(i).getStartDate().equals(selectedFullDate))
+                calArrayList.remove(i);
+
+        }
+        try {
+            writeStorage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    setMonthView();
     }
 
     public void writeStorage() throws IOException {
@@ -247,6 +286,7 @@ dehat standardizalt *shrugs*
     }
 
     public void calArrayInit() throws FileNotFoundException {
+
         FileInputStream input = getContext().openFileInput(SAVE_FILE_NAME);
         DataInputStream din = new DataInputStream(input);
         int sz = 0;
@@ -268,7 +308,7 @@ dehat standardizalt *shrugs*
             }
             stringArrayTemp = line.split(" ");
             try {
-                calArrayList.add(new CalendarData(
+               calArrayList.add(new CalendarData(
                         LocalDate.parse(stringArrayTemp[0], fos),
                         LocalDate.parse(stringArrayTemp[1], fos),
                         stringArrayTemp[2],
@@ -285,4 +325,5 @@ dehat standardizalt *shrugs*
         }
 
     }
+
 }
